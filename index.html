@@ -84,45 +84,52 @@ const generateCell = () => {
     return cellDiv;
 }
 
+let hueShift = 0;
+
 setInterval(
 
     () => {
 
-    ROOT.empty();
+        ROOT.css( 'filter', `hue-rotate(${ hueShift }deg)` );
+        hueShift += 5;
 
-    let brightness = .1;
+        ROOT.empty();
 
-    grid.map( ( row, index ) => {
+        let brightness = .1;
 
-        let cellDiv = '';
+        grid.map( ( row, index ) => {
 
-        const rowDiv = $( 
-            `<div style="text-align: center; filter: brightness(${ brightness }); 
-            margin-left: ${ index % 2 ? '192px' : 0 }; margin-right: ${ index % 2 ? '128px' : 0 }; ">` 
-        );
+            let cellDiv = '';
 
-        let count = 0;
+            const rowDiv = $( 
+                `<div style="text-align: center; filter: brightness(${ brightness }); 
+                margin-left: ${ index % 2 ? '192px' : 0 }; margin-right: ${ index % 2 ? '128px' : 0 }; ">` 
+            );
 
-        row.map( cell => {
+            let count = 0;
 
-            const cellDiv = generateCell();
+            row.map( cell => {
 
-            if( Math.floor( Math.random() * 10 ) > 7 ) {
+                const cellDiv = generateCell();
 
-                count++;
+                if( Math.floor( Math.random() * 10 ) > 7 ) {
 
-                rowDiv.append( cellDiv );
-            }
-        });
+                    count++;
 
-        cellDiv = generateCell();
-        count % 2 == 0 ? rowDiv.append( cellDiv ) : false;
+                    rowDiv.append( cellDiv );
+                }
+            });
 
-        ROOT.append( rowDiv );
+            cellDiv = generateCell();
+            count % 2 == 0 ? rowDiv.append( cellDiv ) : false;
 
-        brightness += .05;
+            ROOT.append( rowDiv );
 
-    }) }, 300
+            brightness += .05;
+
+        }) 
+    
+    }, 300
 );
 
 
