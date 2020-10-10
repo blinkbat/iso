@@ -91,7 +91,7 @@ setInterval(
     () => {
 
         ROOT.css( 'filter', `hue-rotate(${ hueShift }deg)` );
-        hueShift += 5;
+        hueShift < 360 ? hueShift += 5 : hueShift = 0;
 
         ROOT.empty();
 
@@ -103,7 +103,7 @@ setInterval(
 
             const rowDiv = $( 
                 `<div style="text-align: center; filter: brightness(${ brightness }); 
-                margin-left: ${ index % 2 ? '192px' : 0 }; margin-right: ${ index % 2 ? '128px' : 0 }; ">` 
+                margin-left: ${ index % 2 ? '64px' : 0 }; ">` 
             );
 
             let count = 0;
